@@ -277,3 +277,20 @@ For questions, suggestions, or support:
 ---
 
 **⚠️ Medical Disclaimer**: This tool is for educational purposes only and should not replace professional medical advice. Always consult qualified healthcare professionals for medical decisions.
+
+## Portfolio brief
+
+A medical study assistant focused on document-grounded question answering and accessible learning workflows.
+
+### Visual system
+
+Stripe-inspired product clarity: clean surfaces, confident typography, compact status signals, and a single high-trust accent.
+
+### Architecture
+
+The application combines document ingestion, retrieval, answer generation, and user-facing study flows. Keep model providers replaceable and secrets external.
+
+### Run and output
+
+Use the local setup documented in the repository. Answers should expose source context and clearly separate retrieved evidence from generated explanation.
+
