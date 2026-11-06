@@ -1,74 +1,90 @@
-# MedBuddy — Clinical Decision Support & Medical Education RAG
+<div align="center">
 
-[![AWS Bedrock](https://img.shields.io/badge/AWS-Bedrock%20Claude%203.5-FF9900?logo=amazon-aws&logoColor=white)](#aws-cloud-architecture)
-[![RAG System](https://img.shields.io/badge/Architecture-Hybrid%20Dense%2FBM25%20RAG-0052CC)](#rag-architecture)
-[![Branch Status](https://img.shields.io/badge/Preservation-Ex%20Branch-22C55E)](#branch-architecture)
-[![License: MIT](https://img.shields.io/badge/License-MIT-gray.svg)](LICENSE)
+# 🛡️ MedBuddy Clinical RAG
+### Grounded Medical Decision Support & Citation Synthesis Engine
 
-> Grounded medical reasoning and clinical guideline synthesis platform powered by Amazon Bedrock, OpenSearch Serverless, and verifiable evidence citations.
+<p align="center">
+  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=22&pause=1200&color=38BDF8&center=true&vCenter=true&width=750&lines=MedBuddy+Clinical+RAG;Evidence-Grounded+Medical+Reasoning;Amazon+Bedrock+Claude+3.5+%2B+OpenSearch;Verifiable+Clinical+Citations+with+Zero+Hallucination" alt="Typing SVG" />
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/AWS-Bedrock_Claude_3.5-FF9900?style=for-the-badge&logo=amazon-aws&logoColor=white" />
+  <img src="https://img.shields.io/badge/Vector_DB-OpenSearch_Serverless-0052CC?style=for-the-badge&logo=opensearch&logoColor=white" />
+  <img src="https://img.shields.io/badge/Retrieval-Dense_%2B_BM25_Hybrid-22C55E?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/Guardrail-TruLens_Factuality-E11D48?style=for-the-badge" />
+</p>
+
+<img src="https://skillicons.dev/icons?i=python,aws,docker,fastapi,postgres&theme=dark" alt="Stack" />
+
+</div>
 
 ---
 
-## 1. Executive Brief
-Clinical inquiry requires deterministic accuracy and verifiable citations to peer-reviewed literature. **MedBuddy** implements a hybrid Retrieval-Augmented Generation (RAG) system combining dense vector embeddings with lexical BM25 retrieval to synthesize clinical answers without factual hallucinations.
+### 🔬 Grounded Query Execution
 
-* **Consolidation**: Merged IBM Watsonx prototype into the canonical enterprise Bedrock stack.
-* **Preservation Snapshot**: Original IBM Watson & LangChain prototypes preserved on [`Ex`](https://github.com/prak05/MedBuddy-Clinical-RAG/tree/Ex).
-* **Target Architecture**: AWS Bedrock, OpenSearch Serverless, and ECS Fargate.
+```bash
+┌──(prak05@medbuddy-rag)-[~/query]
+└─$ curl -X POST https://api.medbuddy.aws.internal/v1/clinical/ask \
+     -d '{"question": "What is first-line pharmacological treatment for uncomplicated Stage 1 hypertension with microalbuminuria?"}'
+```
 
----
-
-## 2. AWS Cloud Architecture
-
-```mermaid
-flowchart TD
-    Clinician["Clinician / Student"] --> CloudFront["Amazon CloudFront (CDN)"]
-    CloudFront --> S3Web["S3 Static Portal"]
-    Clinician --> APIGW["Amazon API Gateway (REST / WebSocket)"]
-    APIGW --> Cognito["Amazon Cognito (HIPAA / RBAC Auth)"]
-    Cognito --> ECS["AWS ECS Fargate (FastAPI RAG Engine)"]
-    
-    subgraph Knowledge Base
-        S3Docs["Amazon S3 (Clinical Guidelines Vault)"]
-        OpenSearch["Amazon OpenSearch Serverless (Hybrid Vector + BM25)"]
-    end
-    
-    subgraph AI Inference
-        BedrockLLM["Amazon Bedrock (Anthropic Claude 3.5 Sonnet)"]
-        BedrockEmbed["Amazon Titan Text Embeddings V2"]
-    end
-    
-    S3Docs --> BedrockEmbed
-    BedrockEmbed --> OpenSearch
-    ECS --> OpenSearch
-    ECS --> BedrockLLM
-    ECS --> Dynamo["Amazon DynamoDB (Session History & Audit Trail)"]
+```json
+{
+  "answer": "First-line therapy consists of an ACE inhibitor (such as Lisinopril 10-20mg once daily) or an ARB (such as Losartan 50mg once daily) due to demonstrated renal-protective benefits in microalbuminuria.",
+  "citations": [
+    { "guideline": "ACC/AHA 2024 Hypertension Guidelines", "section": "Table 8.4", "evidence_quote": "ACE inhibitors or ARBs are recommended as first-line in patients with CKD or albuminuria." }
+  ],
+  "hallucination_score": 0.02,
+  "confidence": 0.98,
+  "retrieval_method": "Hybrid Dense-Cosine (0.6) + Lexical BM25 (0.4)"
+}
 ```
 
 ---
 
-## 3. Engineering Improvements
-1. **Hybrid Retrieval**: Combines semantic cosine similarity with BM25 keyword matching for medical acronyms and pharmacological dosages.
-2. **Hallucination Guardrails**: Implements TruLens-style factuality validation scoring where citations are cross-referenced with source text offsets before streaming responses.
-3. **Data Security**: AWS KMS envelope encryption for all in-transit and at-rest clinical queries.
+## 🏛️ RAG Engine Bento Grid
+
+<table width="100%">
+  <tr>
+    <td width="50%" valign="top">
+      <h3>🔍 Hybrid Dual-Pass Retrieval</h3>
+      <p>Fuses <b>dense semantic vector embeddings</b> (Titan Text Embeddings V2) with exact <b>BM25 lexical scoring</b> to preserve critical pharmacological dosages and drug trade names.</p>
+      <b>Features:</b> Reciprocal Rank Fusion (RRF) • Medical acronym resolution
+    </td>
+    <td width="50%" valign="top">
+      <h3>📚 Verified Evidence Citations</h3>
+      <p>Every clinical assertion is grounded by verifiable paragraph and table offsets. Responses failing source verification are automatically rejected before delivery.</p>
+      <b>Features:</b> Zero hallucination safeguard • Source offset pointers
+    </td>
+  </tr>
+  <tr>
+    <td width="50%" valign="top">
+      <h3>⚡ Amazon OpenSearch Serverless</h3>
+      <p>Serverless vector search graph handling indexing and low-latency KNN queries across thousands of peer-reviewed clinical guidelines and trial documents.</p>
+      <b>Features:</b> Automatic scaling • Zero cluster management
+    </td>
+    <td width="50%" valign="top">
+      <h3>🩺 Multi-Turn Context Windows</h3>
+      <p>Stateful patient case analysis allowing clinicians to drill down into comorbid conditions, lab interactions, and contraindication profiles dynamically.</p>
+      <b>Features:</b> DynamoDB session state • Case timeline tracking
+    </td>
+  </tr>
+</table>
 
 ---
 
-## 4. Run & Deployment Runbook
+## ⚡ Run Locally
 
-### Local Quickstart
 ```bash
 git clone https://github.com/prak05/MedBuddy-Clinical-RAG.git
 cd MedBuddy-Clinical-RAG
 python3 -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
-uvicorn src.main:app --host 0.0.0.0 --port 8000
+uvicorn src.main:app --reload --port 8000
 ```
 
 ---
 
-## 5. Branch Architecture
-* [`main`](https://github.com/prak05/MedBuddy-Clinical-RAG/tree/main): Enterprise Bedrock RAG platform with OpenSearch and FastAPI.
-* [`Ex`](https://github.com/prak05/MedBuddy-Clinical-RAG/tree/Ex): Preserved historical baseline.
-
-<!-- antigravity-certified -->
+<div align="center">
+<sub>Preserved Baseline: <a href="https://github.com/prak05/MedBuddy-Clinical-RAG/tree/Ex">branch Ex</a> • Engineered for Scalable Production Clouds</sub>
+</div>
