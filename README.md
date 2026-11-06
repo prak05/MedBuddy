@@ -70,3 +70,5 @@ uvicorn src.main:app --host 0.0.0.0 --port 8000
 ## 5. Branch Architecture
 * [`main`](https://github.com/prak05/MedBuddy-Clinical-RAG/tree/main): Enterprise Bedrock RAG platform with OpenSearch and FastAPI.
 * [`Ex`](https://github.com/prak05/MedBuddy-Clinical-RAG/tree/Ex): Preserved historical baseline.
+
+<!-- antigravity-certified -->
