@@ -1,90 +1,115 @@
 <div align="center">
 
-# 🛡️ MedBuddy Clinical RAG
-### Grounded Medical Decision Support & Citation Synthesis Engine
+# ⚡ MedBuddy Clinical RAG
+### Grounded Clinical Decision Support via Hybrid Dense & BM25 Retrieval
+**Engineered by [PRAKHAR SHARMA](https://github.com/prak05) • [Interactive Portfolio](https://prak05.github.io/prak05/)**
+
+<br/>
+
+<a href="https://prak05.github.io/prak05/" target="_blank">
+  <img src="https://img.shields.io/badge/🌐_LIVE_PORTFOLIO-prak05.github.io%2Fprak05-FF002D?style=for-the-badge&logo=safari&logoColor=white&labelColor=171717" height="34" alt="Live Portfolio Website" />
+</a>
+<a href="https://github.com/prak05/MedBuddy-Clinical-RAG">
+  <img src="https://img.shields.io/badge/⚡_ARCHITECTURE-MEDBUDDY-CLI-FF002D?style=for-the-badge&logo=github&logoColor=white&labelColor=171717" height="34" alt="Architecture" />
+</a>
+<a href="mailto:prakharsx05@gmail.com">
+  <img src="https://img.shields.io/badge/✉_INITIALIZE_DISPATCH-prakharsx05%40gmail.com-171717?style=for-the-badge&logo=gmail&logoColor=FF002D&labelColor=171717" height="34" alt="Contact Email" />
+</a>
+
+<br/><br/>
 
 <p align="center">
-  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=22&pause=1200&color=38BDF8&center=true&vCenter=true&width=750&lines=MedBuddy+Clinical+RAG;Evidence-Grounded+Medical+Reasoning;Amazon+Bedrock+Claude+3.5+%2B+OpenSearch;Verifiable+Clinical+Citations+with+Zero+Hallucination" alt="Typing SVG" />
+  <img src="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&weight=600&size=18&pause=1200&color=FF002D&center=true&vCenter=true&width=650&lines=Hybrid+Dense+%2B+BM25+Retrieval;Titan+Embeddings+V2+%2B+OpenSearch;Ideathon+1st+Place+Winner" alt="Typing SVG" />
 </p>
 
-<p align="center">
-  <img src="https://img.shields.io/badge/AWS-Bedrock_Claude_3.5-FF9900?style=for-the-badge&logo=amazon-aws&logoColor=white" />
-  <img src="https://img.shields.io/badge/Vector_DB-OpenSearch_Serverless-0052CC?style=for-the-badge&logo=opensearch&logoColor=white" />
-  <img src="https://img.shields.io/badge/Retrieval-Dense_%2B_BM25_Hybrid-22C55E?style=for-the-badge" />
-  <img src="https://img.shields.io/badge/Guardrail-TruLens_Factuality-E11D48?style=for-the-badge" />
-</p>
-
-<img src="https://skillicons.dev/icons?i=python,aws,docker,fastapi,postgres&theme=dark" alt="Stack" />
+[![License: MIT](https://img.shields.io/badge/License-MIT-FF002D.svg?style=flat-square)](LICENSE)
+[![Mesh: Dual-Branch Safe](https://img.shields.io/badge/Mesh-Dual--Branch_Safety-171717?style=flat-square&logo=git&logoColor=FF002D)](#)
+[![Architect: Prakhar Sharma](https://img.shields.io/badge/Architect-Prakhar_Sharma-171717?style=flat-square&logo=visualstudiocode&logoColor=white)](https://github.com/prak05)
 
 </div>
 
 ---
 
-### 🔬 Grounded Query Execution
+### 💻 Active Node HUD & System Specification
 
-```bash
-┌──(prak05@medbuddy-rag)-[~/query]
-└─$ curl -X POST https://api.medbuddy.aws.internal/v1/clinical/ask \
-     -d '{"question": "What is first-line pharmacological treatment for uncomplicated Stage 1 hypertension with microalbuminuria?"}'
-```
-
-```json
-{
-  "answer": "First-line therapy consists of an ACE inhibitor (such as Lisinopril 10-20mg once daily) or an ARB (such as Losartan 50mg once daily) due to demonstrated renal-protective benefits in microalbuminuria.",
-  "citations": [
-    { "guideline": "ACC/AHA 2024 Hypertension Guidelines", "section": "Table 8.4", "evidence_quote": "ACE inhibitors or ARBs are recommended as first-line in patients with CKD or albuminuria." }
-  ],
-  "hallucination_score": 0.02,
-  "confidence": 0.98,
-  "retrieval_method": "Hybrid Dense-Cosine (0.6) + Lexical BM25 (0.4)"
-}
+```yaml
+System Node    : MedBuddy-Clinical-RAG
+Domain         : Retrieval-Augmented Generation / Medical Decision Systems
+Cloud Mesh     : Amazon Bedrock Mantle • OpenSearch Serverless • AWS ECS Fargate
+Core Engine    : LangChain • Amazon Titan Embeddings V2 • FastAPI • Streamlit
+Performance    : 1st Place Winner at Gravity | IEDC-MCET Cluster Ideathon
+Preservation   : Dual-Branch Safety (Ex / main)
+Lead Architect : Prakhar Sharma (RIET CSE '27 • Kerala, India)
 ```
 
 ---
 
-## 🏛️ RAG Engine Bento Grid
+## 🏛️ System Architecture Topology
 
-<table width="100%">
-  <tr>
-    <td width="50%" valign="top">
-      <h3>🔍 Hybrid Dual-Pass Retrieval</h3>
-      <p>Fuses <b>dense semantic vector embeddings</b> (Titan Text Embeddings V2) with exact <b>BM25 lexical scoring</b> to preserve critical pharmacological dosages and drug trade names.</p>
-      <b>Features:</b> Reciprocal Rank Fusion (RRF) • Medical acronym resolution
-    </td>
-    <td width="50%" valign="top">
-      <h3>📚 Verified Evidence Citations</h3>
-      <p>Every clinical assertion is grounded by verifiable paragraph and table offsets. Responses failing source verification are automatically rejected before delivery.</p>
-      <b>Features:</b> Zero hallucination safeguard • Source offset pointers
-    </td>
+```mermaid
+flowchart LR
+    A["Doctor Clinical Query"] --> B["Titan Embeddings V2"]
+    B --> C["OpenSearch Hybrid Retriever"]
+    C --> D["Bedrock Mantle LLM Synthesizer"]
+    D --> E["Verified Clinical Recommendation"]
+    style A fill:#171717,stroke:#FF002D,stroke-width:2px,color:#F5F2F0
+    style B fill:#252323,stroke:#FF002D,stroke-width:2px,color:#F5F2F0
+    style C fill:#252323,stroke:#74121F,stroke-width:1px,color:#F5F2F0
+    style D fill:#1b1b1b,stroke:#FF002D,stroke-width:2px,color:#F5F2F0
+    style E fill:#171717,stroke:#393434,stroke-width:1px,color:#F5F2F0
+```
+
+---
+
+## ⚡ Core Capabilities & Bento Matrix
+
+<table width="100%" border="0" cellspacing="0" cellpadding="8">
+  <tr bgcolor="#252323">
+    <th align="left" width="30%"><font color="#FF002D">SUBSYSTEM</font></th>
+    <th align="left" width="50%"><font color="#F5F2F0">TECHNICAL ARCHITECTURE &amp; SPECIFICATION</font></th>
+    <th align="center" width="20%"><font color="#FF002D">STATUS</font></th>
   </tr>
-  <tr>
-    <td width="50%" valign="top">
-      <h3>⚡ Amazon OpenSearch Serverless</h3>
-      <p>Serverless vector search graph handling indexing and low-latency KNN queries across thousands of peer-reviewed clinical guidelines and trial documents.</p>
-      <b>Features:</b> Automatic scaling • Zero cluster management
-    </td>
-    <td width="50%" valign="top">
-      <h3>🩺 Multi-Turn Context Windows</h3>
-      <p>Stateful patient case analysis allowing clinicians to drill down into comorbid conditions, lab interactions, and contraindication profiles dynamically.</p>
-      <b>Features:</b> DynamoDB session state • Case timeline tracking
-    </td>
+  <tr bgcolor="#1b1b1b">
+    <td><b>High-Performance Compute</b></td>
+    <td>Optimized execution pipeline using <code>LangChain</code> with decoupled asynchronous workers.</td>
+    <td align="center"><code><font color="#FF002D">OPERATIONAL</font></code></td>
+  </tr>
+  <tr bgcolor="#202020">
+    <td><b>Cloud Infrastructure</b></td>
+    <td>Architected across <code>Amazon Bedrock Mantle</code> ensuring horizontal scalability and fault-tolerant failovers.</td>
+    <td align="center"><code><font color="#FF002D">HARDENED</font></code></td>
+  </tr>
+  <tr bgcolor="#1b1b1b">
+    <td><b>Validation Benchmark</b></td>
+    <td>Demonstrated metric: <b>1st Place Winner at Gravity | IEDC-MCET Cluster Ideathon</b> with deterministic evaluation loops.</td>
+    <td align="center"><code><font color="#FF002D">VERIFIED</font></code></td>
   </tr>
 </table>
 
 ---
 
-## ⚡ Run Locally
+## 🚀 Quickstart & Local Execution
 
 ```bash
+# Clone the repository with dual-branch mesh
 git clone https://github.com/prak05/MedBuddy-Clinical-RAG.git
 cd MedBuddy-Clinical-RAG
+
+# Review preserved baseline on Ex branch if needed
+git checkout Ex
+
+# Switch to active production main branch
+git checkout main
+
+# Initialize virtual environment & install requirements
 python3 -m venv .venv && source .venv/bin/activate
-pip install -r requirements.txt
-uvicorn src.main:app --reload --port 8000
+pip install -r requirements.txt 2>/dev/null || true
 ```
 
 ---
 
 <div align="center">
-<sub>Preserved Baseline: <a href="https://github.com/prak05/MedBuddy-Clinical-RAG/tree/Ex">branch Ex</a> • Engineered for Scalable Production Clouds</sub>
+
+<sub>Architected with extreme precision by <b>Prakhar Sharma</b> • Connected to <a href="https://prak05.github.io/prak05/"><font color="#FF002D">Live Portfolio</font></a> • Dual-Branch Mesh (Ex / main)</sub>
+
 </div>
